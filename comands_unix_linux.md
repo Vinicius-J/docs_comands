@@ -1,0 +1,101 @@
+
+## Significados
+- GUI - Graphical User Interface - Quando se tem interface para o usuário clicar, como por exemplo ícones de programas para poder abrir, clicar com o mouse para criar novas pastas e arquivos, etc.
+- CLI - Command Line Interface - Usando comandos pelo terminal para poder fazer as mesmas coisas que se faz com interface, como criar arquivos, abrir programas, excluir, copiar, etc.
+## Privilégios do Usuário
+- `sudo`  Permite executar comandos com privilégios de outro usuário - por padrão, como o superusuário - root.
+	- `sudo` significa "substitute user do" (usuário substituto faça)
+## Navegação
+- `pwd`  "print working directory" - Mostra o caminho do diretório atual
+- `ls` Listar tudo no diretório:
+	- `-a` Inclui diretório e arquivos ocultos (com ponto no inicio do nome)
+	- `-l` Lista no formato longo
+	- `-h` com `-l`, é um sufixo de tamanho para facilitar leitura
+- `xdg-open + dir`  abrir a pasta no explorador de arquivos
+- `nautilus + dir`  abrir a pasta no explorador de arquivos nautilus, mas executando no terminal
+- `cd` - "change directory" - Mudar de diretório:
+	- `.`  diretório atual
+	- `..`  diretório acima, ou um anterior
+	- `/`  o diretório root ou a separação de diretório
+	- `~`  pasta home - `/home/<USUARIO>` (`cd` sem nada vai para o mesmo local)
+	- `-`   volta o diretório que estava antes
+- `tree`  mostra a árvore do diretório atual (precisa instalar a extensão)
+	- `-d`  mostrar **apenas** diretório
+	- `-a`  mostra arquivos ocultos
+	- `-L <NUMERO>` mostra os diretórios dentro com base no `<NUMERO>`
+## Manipulando arquivos e diretórios
+#### Arquivos e diretórios
+- `cp` copia arquivos ou diretórios
+	- Copiar e mudar nome: `cp nome_arquivo <NOVO_DIR> novo_nome_arquivo`
+	- `-r` copia diretório em modo recursivo
+	- `scp` copia de diretório remoto da mesma rede
+- `mv` move arquivos ou diretório (serve também para renomear arquivos)
+	- Renomear : `mv nome_do_arquivo novo_nome_arquivo`
+	- Mover: `mv nome_arquivo <NOVO_DIR>`
+- `mkdir` cria um novo diretório
+	- `-p` criar diretório com outros diretórios dentro
+		- `mkdir -p diretorio/diretorio_filho/diretorio_filho_filho/{dir1,dir2,dir3}`
+- `rm` apaga arquivos e diretório
+	- `-r` modo recursivo para diretórios (todos os arquivos dentro)
+	- `-f` força a exclusão do arquivo ou diretório sem perguntar nada
+#### Arquivos:
+- `cat`   concatena, cria e exibe  arquivos de texto
+	- Exibir arquivo: `cat nome_do_arquivo`
+	- Juntar: `cat arquivo1 arquivo2 > arquivo_combinado`
+	- Criar novo arquivo: `cat > nome_do_arquivo` seguido por `Crtl+D`
+	- `-n`  enumera as linhas
+- `head` mostra as primeiras linhas do arquivo 
+- `tail`  mostra as últimas linhas do arquivo
+- `less` mostra todo o arquivo de cima para baixo, mas carrega conforme vai descendo
+	- `-<NÚMERO>`  mostra a quantidade de linhas que for adicionado em `<NÚMERO>`
+	- `-f`  continua assistindo o arquivo em busca de novos dados
+- `wc` conta linhas, palavras e caracteres de arquivo de texto
+	- `-l` linhas
+	- `-m` caracteres
+	- `-w` palavras
+- `nano` editor básico de textos 
+- `touch` cria arquivos vazios ou atualiza data de modificações e tempos de acesso de arquivos existentes
+- `diff` retorna o que tem de diferente entre dois arquivos
+## Operadores Úteis
+- `;` permite executar vários comandos na mesma linha, ignorando caso houver erros
+- `&&` permite executar vários comando na mesma linha, mas se caso der erro no comando anterior, não executa o próximo e para a execução
+- `||` permite executar vários comandos na mesma linha, mas executa o próximo comando caso o anterior de algum erro
+- `|` joga a saída de um comando para a entrada de outro
+- `>` joga saída de um comando e redireciona para um arquivo, apagando o arquivo todo e substituindo seu conteúdo (caso não houver arquivo, cria um novo)
+- `>>` joga a saída de um comando e redireciona para um arquivo, não apaga o que estiver no arquivo, apenas adiciona o novo conteúdo a  partir da última linha (caso não houver arquivo, cria um novo)
+- `&` joga a execução do código para o background. Veja `jobs` e `fg` para complementar
+	- `man git &`
+## Background e Foreground
+- `jobs` mostra trabalhos em execução
+- `fg %<ID_JOB>` leva o que estiver em background para o foreground
+- `bg %<ID_JOB>` continua um job em background
+- `kill %<ID_JOB>` mata um job
+## Comandos uteis
+- `find` usado para procurar arquivos dentro de diretórios
+	- `find . <nome_arquivo>` procura no diretório atual o arquivo com o `<nome_arquivo>`
+- `man <COMANDO>` manual do comando com seus complementos e para que serve
+- `<COMANDO> --help` mostra os complementos mais utilizados com o `<COMANDO>` e suas funções
+- `*` se refere a todos, por exemplo: `ls *.txt`  mostra todos os arquivos que terminam com .txt
+- `grep` usado para procurar por determinados padrões em arquivos de saídas de comandos
+	- `grep "erro" /var/log/syslo` procura por todas as palavras `"erro"` no arquivo
+	- `ls -l | grep <nome_arquivo>` procura na saída do comando `ls` por todos os arquivos com o nome passado como parâmetro
+- `echo` mostra na tela o que eu escrever
+- `sleep <TEMPO>` terminal "dorme" durante o `<TEMPO>` determinado em segundos
+- `top` mostra todos os trabalhos que estão sendo executado no momento
+- `htop` versão melhorada do `top`
+- `file` mostra o tipo do arquivo
+- `history` histórico de comandos do terminal
+- `pkill` mata processos
+- `whoami` mostra o usuário
+- `hostname` mostra o nome do computador
+	- `hostname -I` mostra todas as interfaces de IP que tem
+- `ip a` mostra todos os IPs com todas as informações 
+- `uname` mostra dados sobre o sistema
+- `ps aux` mostra todos os processos rodando no sistema no momento da execução
+- `ping <link_web>` mostra a velocidade de resposta de um servidor com o computador
+- `free` mostra o uso da memória
+	- `-h` para mostra mais detalhado
+	- `-m` para mostrar menos detalhado
+- `ps` mostra os comando rodando atualmente no terminal
+- `df -h` mostra todos os dispositivos do computador e suas informações
+- `ncdu` escaneia o computador para ver os arquivos com maior gasto de quantidade de memória      
