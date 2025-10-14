@@ -1,66 +1,63 @@
-## 1: Editar textos - remoção
-	- x - (apenas um caracter)
-## 1: Editar textos - adicionar
-	- A - (final da linha no modo inserção)
-	- a - (depois do caracter selecionado)
-## 2: Comandos de remoção
-	- dw - deleta até o início da próxima palavra 
-	- d$ - deleta até o final da linha
-	- de - deleta até o fim da palavra atual
-	- dd - deletar a linha inteira
-## 2.4: Contador de movimentos
-	- <numero>w - mover quantidade de palavras
-	- <numero>e - mover para o fim da palavra
-**Obs.:** Para repetir um comando, basta adicionar um número na frente.
-**Ex.:** 2dd - Para apagar duas linhas seguidas
-	- 0 - mover para o início da linha
-	- w - mover palavra por palavra
-##  2.7: Comando undo (desfazer) e refazer
-	- u - desfaz o último comando executado
-	- U - retorna a linha ao seu estado original
-	- CRTL+R - refaz os comandos	
-## 3: Comando colar
-	- p - Para colar o que estiver guardado no registro do vim
-	- r<caracter> - Para substuir o caracter sob o cursor
-	- ce - Para mudar a palavra a partir do cursor
-	- c$ - Para mudar até o fim da linha a partir do cursor
-**Obs.:** O comando change (c) funciona igual ao delete (d), ou seja, podendo ser usado com [número] e movimento.
-**Ex.:** c2w - para mudar duas palavras
-## 4: Localização do cursor e estado do arquivo
-	- CRTL+G - Para ver nome do arquivo e posição no arquivo
-	- G - Para mover para o final do arquivo
-	- gg - Para mover para o início do arquivo
-	- G+<linha> - Para mover para linha específica
-##4.2: Comando de buscar
-	- /<frase> - Para procurar por uma frase ou palavra
-	- ?<frase> - Para procurar por uma frase ao contrário
-	- n - Para ir para a próxima palavra encontrada
-	- N - Para retornar a palavra anterior 
-**Obs.:** `CTRL+O` e `CRTL+I` servem para voltar aonde o cursor estava anteriormente e retornar ao local mais recente, nesta ordem
-	- % - Para buscar parênteses correspondentes ou voltar ao primeiro
-**Ex.:** ([{}]) - Cada um tem seu correspondente, ou seja, é aberto e fechado
-## 4.4: Comando substituir
-	- :s/<velho>/<novo>/g - Expressão que pode ser usado para substituir palavras na linhas que está o cursor
-	- :#,#s/<velho>/<novo>/g - Substituir em linhas específicas, onde o # é as linhas
-	- :%s/<velho>/<novo>/g - Para mudar todas as ocorrências no arquivo inteiro
-	- :%s/<velho>/<novo>/gs - Para mudar todas as ocorrências no arquivo inteiro, com a opção de confirmar
-## 5: Executar comandos externos
-	- :!<comando> - Para executar comando como se estivesse no shell
-## 5.2: Salvar arquivos
-	- :w <nome> - Para salvar arquivo com o nome passado
-**Obs.:** Para salvar parte de um arquivo, selecione ele com o modo visual (v) e siga o passo de salvar arquivos
-	- :r <nome_arquivo> - Para recuperar e unir arquivo abaixo do cursor
-**Obs.:** Também é possível unir saída de um comando shell
-**Ex.:** :r !ls - Uni o resultado que sair desse comando
-## 6: Comando abrir
-	- o - Inserir uma linha abaixo no modo de inserção
-	- O - Inserir uma linha acima no modo de inserção
-## 6.3: Outra forma de substituição
-	- R - Modo de substituição, onde altera a partir de onde está o cursor apagando o próximo caracter
-## 6.4: Copiar e colar texto
-	- y - Copiar texto
-	- p - Colar texto
-**Obs.:** Logo após copiar (y), se digitar j$ vai para o final da próxima linha
-**Obs.:** É possível usar o copiar (y) como um operador; por exemplo, yw copia uma palavra
-
-	PAREI NA LIÇÃO 6.5
+## Editar textos
+- `x` deleta apenas um carácter por vez
+- `p` cola o que estiver guardado no registro do vim
+- `y` copiar texto selecionado no modo visualização (v)
+	- Pode ser usado com contador e movimento, por exemplo, `yw` copia a palavra onde está o cursor
+	- `j$` logo após copiar leva para o final da próxima linha
+- `A` vai até o final da linha e entra no modo inserção
+- `a` vai para depois do cursor e entra no modo inserção
+- `dw` deleta até o início da próxima palavra 
+- `d$` deleta até o final da linha
+- `de` deleta até o fim da palavra atual
+- `dd` deletar a linha inteira
+## Contador e movimentos
+- `w` move para o início da próxima palavra
+	- `<num>w` mover quantidade de palavras
+- `e` move para o fim da próxima palavra
+	- `<num>e` move para o fim da `<num>` palavra
+**Obs.:** Para repetir um comando, basta adicionar o número de repetições na frente, por exemplo. `2w` para repetir o comando de pular para o início da próxima palavra **duas vezes**
+- `0` move para o início da linha
+- `o` cria uma linha **abaixo** de onde o cursor está, no modo de inserção
+- `O` cria uma linha **acima** de onde o cursor está, no modo de inserção
+##  Comando undo (desfazer) e refazer
+- `u` desfaz o último comando executado
+- `U` desfaz toda as alterações da linha onde está o cursor
+- `CRTL+R` refaz os comandos	
+## Colar e mudar
+- `r<caracter>` substitui o carácter sob o cursor
+- `R` substitui a partir de onde o cursor está, apagando conforme inserir novos caracteres
+- `ce` muda os caracteres a partir de onde está o cursor
+- `c$` muda até o fim da linha a partir do cursor
+**Obs.:** O comando change (c) funciona igual ao delete (d), ou seja, podendo ser usado com **contador** e **movimento**.
+**Ex.:** `c2w` muda duas palavras seguidas
+## Localização do cursor e estado do arquivo
+- `CRTL+G` mostra nome do arquivo e posição do cursor no arquivo
+- `G` move para o final do arquivo
+- `gg` move para o início do arquivo
+- `G+<linha>` move para linha específica
+- `CTRL+O` retorna para posição anterior do cursor
+- `CRTL+I` retorna para o local mais recente do cursor
+## Comando de buscar
+- `/<search>` procura por uma frase ou palavra de cima para baixo
+- `?<search>` procura por uma frase ou palavra de baixo para cima
+- `n` move para o próximo resultado  da pesquisa
+- `N` retorna para o resultado anterior da pesquisa
+- `%` busca por parentese correspondente (o que abre e o que fecha)
+## Comando substituir
+- `:s/<old>/<new>/g` substitui o `<old>` pelo `<new>` na mesma linha
+- `:#,#s/<old>/<new>/g` substitui o `<old>` pelo `<new>` em linhas específicas (alterar o `#` pelas linhas)
+- `:%s/<old>/<new>/g` substitui todos os `<old>` pelo `<new>` no arquivo
+- `:%s/<old>/<new>/gs` substitui todos os `<old>` pelo `<new>` no arquivo, com a opção de confirmar
+## Executar comandos externos
+- `:!<comand>` executa comando como se estivesse no shell
+## Salvar arquivos
+- `:w <name>` salva arquivo com o nome de `<name>`
+	- Para salvar parte de um arquivo, selecione ele com o modo visual (v) e salve normalmente
+- `:r <doc_name>` recupera o `<doc_name>` e uni no arquivo atual logo abaixo do cursor
+	- `:r !<comand>` pega o resultado do `<comand>` e uni no arquivo atual
+## Configuração de preferência
+- `:set ic` (Ignore Case)  ignora a diferença entre maiúscula e minúscula na pesquisa
+- `:set hls is` realça as pesquisas
+**Obs.:** adicione `no` no início do comando para desabilitar a preferência, por exemplo, `:set nohls` desabilita o realce das pesquisas
+## Comandos úteis
+- `CRTL+w` pular para outra janela quando mais de uma estiver aberta no Vim, por exemplo, sistema de ajuda (`F1` || `:help <ENTER> || :help <comand> <ENTER>`)
