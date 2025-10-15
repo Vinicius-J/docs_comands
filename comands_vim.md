@@ -1,6 +1,12 @@
 ## Movimentação
 - `w` move para o início da próxima palavra
+- `W` move para o início da próxima palavra ignorando pontuação
 - `e` move para o fim da próxima palavra
+- `E` move para o fim da próxima palavra ignorando pontuação
+- `b` volta para o início da palavra anterior
+- `B` volta para o início da palavra anterior ignorando pontuação
+- `ge` volta para o fim da palavra anterior
+- `gE` volta para o fim da palavra anterior ignorando pontuação
 - `0` move para o início da linha
 - `$` move para o final da linha
 - `f<caracter>` move o cursor para o próximo `<caracter>`
@@ -10,8 +16,7 @@
 - `%` move para o parênteses correspondente
 - `G` move para o final do arquivo
 - `gg` move para o início do arquivo
-- `G+<linha>` move para linha específica
-
+- `<line>+G` move para linha específica
 
 **Obs.:** Para repetir um comando, basta adicionar o número de repetições na frente, por exemplo. `2w` para repetir o comando de pular para o início da próxima palavra **duas vezes**
 
@@ -19,8 +24,13 @@
 
 ## Edição de texto
 - `x` deleta o caracter onde está o cursor
-- `p` cola o que estiver guardado no registro do vim
+- `p` cola o valor depois oua abaixo de onde está o cursor (substitui o registro)
+- `P` cola o valor atrás ou acima de onde está o cursor (não substitui o registro)
+- `acento grave+[` vai para o início do que acabou de colar
+- `acento grave+]` vai para o final do que acabou de colar
+- `gp` e `gP` mesma coisa do `p` e `P` mas coloca o cursor no final da linha
 - `y` copia
+- `yy` copia a linha inteira
 	- `j$` logo após copiar leva para o final da próxima linha
 - `d<movimento>` deleta com base no movimento
     - por exemplo, `dw` que apaga apenas uma palavra
@@ -28,6 +38,8 @@
 - `u` desfaz o último comando executado
 - `U` desfaz toda as alterações da linha onde está o cursor
 - `CRTL+R` refaz o último comando
+- `"<letter><comand>` joga o valor da ação do `<comand>` para o registro do `<letter>`
+- `"<letter>p` usa o registro do `<num>`, por exemplo, `"1p`
 
 **Obs.:** Alguns comandos podem ser usado com contador e movimentos, por exemplo, `yw` copia a palavra onde o cursor está; `2p` cola duas vezes o que foi copiado 
 
@@ -58,7 +70,14 @@
 - `:s/<old>/<new>/g` substitui o `<old>` pelo `<new>` na mesma linha
 - `:#,#s/<old>/<new>/g` substitui o `<old>` pelo `<new>` em linhas específicas (alterar o `#` pelas linhas)
 - `:%s/<old>/<new>/g` substitui todos os `<old>` pelo `<new>` no arquivo
-- `:%s/<old>/<new>/gs` substitui todos os `<old>` pelo `<new>` no arquivo, com a opção de confirmar
+- `:<range>s//<old>/<new>/g` substitui a última busca realizada
+
+**Obs.:** O range das substituições pode ser passado com o modo de vizualização (v)
+
+### Flags
+- `g` realiza a substituição na linha onde o cursor está
+- `c` solicita confirmação da substituição
+- `i` realiza a busca sem diferenciar maiúscula de minúscula
 
 ---
 
@@ -67,6 +86,17 @@
 - `?<search>` procura por uma frase ou palavra de baixo para cima
 - `n` move para o próximo resultado  da pesquisa
 - `N` retorna para o resultado anterior da pesquisa
+- `*` busca a próxima ocorrência da palavra onde está o cursor
+- `#` busca a ocorrência anterior da palavra onde está o cursor
+- `g*` e `g#` mesma coisa do `*` e `#` 
+
+**Obs.:** Se colocar a flag `\c` no final, a busca vai ignorar case sensitive
+
+### É possível combinar comandos com o de busca, por exemplo:
+- `y/<word>` copia de onde o cursor está até a próxima ocorrência da `<word>`
+- `d?<word>` apaga/corta tudo de onde o cursor está até a `<word>`
+- `c/<word>` apaga e entra na inserção (change) de onde o cursor está até a `<word>`
+- `v?<word>` seleciona tudo de onde o cursor está até a `<word>`
 
 ---
 
@@ -80,9 +110,22 @@
 - `:r <doc_name>` recupera o `<doc_name>` e uni no arquivo atual logo abaixo do cursor
 	- `:r !<comand>` pega o resultado do `<comand>` e uni no arquivo atual
 - `gc` para comentar uma linha ou seleção
-- `>>` indenta o código para frente
-- `<<` indenta o código para trás
+- `>>` e `<<` indenta o código para frente e para trás
 - `==` corrige a indentação da linha
+- `CTRL+e` movimenta a tela para cima sem tirar o cursor do lugar
+- `CTRL+y` movimenta a tela para baixo sem tirar o cursor do lugar
+- `zt` move a linha do cursor para o top
+- `zz` move a linha do cursor para o meio
+- `zb` move a linha do cursor para o rodapé
+- `H` move o cursor para a primeira linha do viewport
+- `L` move o cursor para a última linha do viewport
+- `M` move o cursor para o meio do viewport
+- `CTRL+d` move o cursor meia página pra baixo
+- `CTRL+u` move o cursor meio página para cima
+- `CTRL+f` move o cursor uma página para cima
+- `CTRL+b` move o cursor uma página para baixo
+- `{` e `}` move para o próximo espaço em branco antes do parágrafo
+- `[` e `]` move para o início do parágrafo
 
 ---
 
@@ -96,5 +139,4 @@
 
 ## Comandos úteis
 - `CRTL+w` pular para outra janela quando mais de uma estiver aberta no Vim, por exemplo, sistema de ajuda (`F1` || `:help <ENTER> || :help <comand> <ENTER>`)
-
-
+- `:registers` para ver os registros (itens deletados ou copiados)
