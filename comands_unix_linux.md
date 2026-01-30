@@ -99,3 +99,4 @@
 - `ps` mostra os comando rodando atualmente no terminal
 - `df -h` mostra todos os dispositivos do computador e suas informações
 - `ncdu` escaneia o computador para ver os arquivos com maior gasto de quantidade de memória      
+- `CTRL + SHIFT + C` abri terminal na aba aberta
